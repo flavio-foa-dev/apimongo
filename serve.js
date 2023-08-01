@@ -11,6 +11,7 @@ const routes = {
 
 
 const serve = http.createServer(function(req, res) {
+  console.log(req.url)
   res.writeHead(200, {'content-type': 'text/plain'})
   res.end(routes[req.url])
 })

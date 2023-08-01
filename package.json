@@ -3,14 +3,20 @@
   "version": "1.0.0",
   "description": "Nodejs | API Rest | MongoDB | Express",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon serve.js"
+    "dev": "nodemon serve.js",
+    "develop": "nodemon server.js"
+
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   }
 }
