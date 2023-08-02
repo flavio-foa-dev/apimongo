@@ -1,5 +1,6 @@
 import express  from "express";
 import db from "./config/dbconnect.js";
+import routes from "./routers/index.js";
 
 db.on("error", console.log.bind(console,"error.message"))
 db.once("open", ()=> console.log('Ah, we have our first user!'))
@@ -19,11 +20,14 @@ const books = [
 
 const app = express();
 app.use(express.json());
+routes(app)
 
-
-app.get('/', function(req, res) {
-  res.status(200).send({message: 'Success'})
-})
+// app.get('/books', function(req, res) {
+//   res.status(200).send({message: 'Success'})
+//   booksModel.find((err, books)=> {
+//   return res.status(200).json(books);
+//   })
+// })
 
 app.get('/books/:id', function(req, res) {
   const {id} = req.params

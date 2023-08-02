@@ -1,10 +1,12 @@
 import mongoose from "mongoose";
-try {
-  mongoose.connect('mongodb+srv://foa:J5sflAvyK8bssjp0@books.1fuvga1.mongodb.net/?retryWrites=true&w=majority')
+import dotenv from "dotenv";
+dotenv.config()
+const connect_key = process.env.DB_CONNECTION
 
-} catch (error) {
-  console.log(error.message)
-}
+
+mongoose.connect(connect_key)
+
+
 
 // const Cat = mongoose.model('Cat', { name: String });
 
