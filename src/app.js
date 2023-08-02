@@ -1,4 +1,8 @@
 import express  from "express";
+import db from "./config/dbconnect.js";
+
+db.on("error", console.log.bind(console,"error.message"))
+db.once("open", ()=> console.log('Ah, we have our first user!'))
 
 const books = [
   {
