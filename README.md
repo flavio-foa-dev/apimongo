@@ -19,4 +19,6 @@ npm outdated	Retorna a lista de dependências desatualizadas mostrando a versão
 npm adduser	Adiciona um novo usuario no https://registry.npmjs.org para permitir a publicação de pacotes
 npm publish	Faz a publicação do pacote no NPM
 
+npm init @eslint/config
+
 

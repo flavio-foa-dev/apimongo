@@ -2,13 +2,11 @@ import BooksModel from "../models/Book.js";
 import { ObjectId } from 'mongodb'
 
 function isValidId(id) {
-try {
-  return new ObjectId(id).toString() === id;
-
-} catch (error) {
- return false
-
-}
+  try {
+    return new ObjectId(id).toString() === id;
+  } catch (error) {
+    return false
+  }
 }
 
 export default class BooksController {
@@ -26,7 +24,7 @@ export default class BooksController {
 
   static getBookById = async(req, res) => {
     const id = req.params.id
-
+    const idvalid = isValidId(id)
     try {
       const result = await BooksModel.findById(id)
       console.log(result)
