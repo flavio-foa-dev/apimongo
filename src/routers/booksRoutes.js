@@ -8,5 +8,6 @@ bookRouter
 .get("/books", BooksController.getBookAll)
 .post("/books", BooksController.save)
 .put("/books/:id", BooksController.updatee)
+.delete("/books/:id", BooksController.destroy)
 
 export default bookRouter

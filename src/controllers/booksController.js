@@ -27,11 +27,10 @@ export default class BooksController {
     const idvalid = isValidId(id)
     try {
       const result = await BooksModel.findById(id)
-      console.log(result)
       res.status(200).json(result)
 
     } catch (error) {
-      res.status(500).json(error.message);
+      res.status(500).json(error.message, "id do livro nao encontrado" );
     }
   }
 
@@ -44,13 +43,25 @@ export default class BooksController {
 
   static updatee = async (req, res) => {
     const id = req.params.id
-    const idvalid = isValidId(id)
-    const book = req.body
-    console.log("id es valid",idvalid)
-    console.log(book, "chamada req.body")
 
-    BooksModel.updateOne({_id:id}, book)
+    try {
+      await BooksModel.findByIdAndUpdate(id, {$set: req.body})
+      res.status(200).send({message: 'Livro atualizado com sucesso'})
+    } catch (error) {
+      res.status(500).send({message: err.message})
+    }
 
+  }
+
+  static async destroy(req, res) {
+    const {id} = req.params
+    try {
+     await BooksModel.findByIdAndDelete(id)
+      res.status(200).json({message: "excluido with sucess"})
+
+    } catch (error) {
+      res.status(500).json({message: error.message})
+    }
 
   }
 }
