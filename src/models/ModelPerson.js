@@ -27,3 +27,5 @@ const personSchema = new mongoose.Schema(
 )
 
 const ModelPerson = mongoose.model('Person', personSchema)
+
+export default ModelPerson
