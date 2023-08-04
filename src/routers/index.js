@@ -1,5 +1,5 @@
 import express from 'express';
-import bookRouter from './booksRoutes.js';
+import custumerRouter from './custumerRoutes.js';
 
 export default function routes(app) {
  app.route("/").get((req, res) => {
@@ -7,6 +7,6 @@ export default function routes(app) {
  })
  app.use(
   express.json(),
-  bookRouter
+  custumerRouter
  )
 }
