@@ -6,16 +6,16 @@ function err(err) {
   const message = {
     CastError : "format id invalid",
     null : "not found",
-    ValidationError: "field required"
+    ValidationError: "field required",
+    MongoServerError: "customer already registered"
   }
   return message[error]
 }
 
 const handleError = (error, req, res, next) => {
   err(error, "testando")
-  res.status(400).json({message : "err(error)"})
-  next
-
+  res.status(400).json({message : err(error)})
+  next()
 }
 
 export default handleError
