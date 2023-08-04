@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose from 'mongoose';
 
 const custumerSchema = new mongoose.Schema(
   {
@@ -7,16 +7,16 @@ const custumerSchema = new mongoose.Schema(
     cnpj: { type: String, required: true, unique: true},
     type: { type: String, required: true },
     id_responsavel: {
-       type: mongoose.Schema.Types.ObjectId,
-       ref: "Person",
-       required: [true, "E preciso um Representante"]
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Person',
+      required: [true, 'E preciso um Representante']
+    },
     year: { type: Number, required: true},
     status:{type: String, required: true},
     date: { type: Date, required: true},
   }
-)
+);
 
-const ModelCustumer = mongoose.model('Custumer', custumerSchema)
+const ModelCustumer = mongoose.model('Custumer', custumerSchema);
 
-export default ModelCustumer
+export default ModelCustumer;
