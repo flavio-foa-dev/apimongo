@@ -6,13 +6,17 @@ const custumerSchema = new mongoose.Schema(
     name: { type: String, required: true },
     cnpj: { type: String, required: true, unique: true},
     type: { type: String, required: true },
-    id_responsavel: { type: Number, required: true},
+    id_responsavel: {
+       type: mongoose.Schema.Types.ObjectId,
+       ref: "Person",
+       required: [true, "E preciso um Representante"]
+      },
     year: { type: Number, required: true},
     status:{type: String, required: true},
     date: { type: Date, required: true},
   }
 )
 
-const Modelcustumer = mongoose.model('custumer', custumerSchema)
+const ModelCustumer = mongoose.model('Custumer', custumerSchema)
 
-export default Modelcustumer
+export default ModelCustumer
