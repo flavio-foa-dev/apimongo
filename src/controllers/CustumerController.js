@@ -1,11 +1,14 @@
+
 import ModelCustumer from '../models/ModelCustumer.js';
 
 export default class CustumerController {
 
   static getCustumerAll = async(req, res, next) => {
     try {
-      const result = await ModelCustumer.find();
-      console.log('todos os dados', result);
+      const result = await ModelCustumer.find()
+        .populate('owner').exec();
+
+
       res.status(200).json(result);
     } catch (error) {
       next(error);
@@ -16,9 +19,12 @@ export default class CustumerController {
     const id = req.params.id;
     try {
       const result = await ModelCustumer.findById(id);
+
+
       if(!result) {
         return res.status(404).json({ message: 'Custumer not found'});
       }
+
       res.status(200).json(result);
     } catch (error) {
       next(error);

@@ -6,7 +6,7 @@ const custumerSchema = new mongoose.Schema(
     name: { type: String, required: true },
     cnpj: { type: String, required: true, unique: true},
     type: { type: String, required: true },
-    id_responsavel: {
+    owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Person',
       required: [true, 'E preciso um Representante']
