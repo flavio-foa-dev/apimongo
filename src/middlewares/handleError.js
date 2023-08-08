@@ -9,7 +9,7 @@ async function codError(err) {
   const message = {
     CastError : {message:'format id invalid', status: 400},
     null : {message:'not found', status: 404},
-    MongoServerError: {message: 'customer already registered', status: 400 },
+    MongoServerError: {message: 'company already registered', status: 400 },
     ValidationError: handleFieldSave(err),
   };
   return message[error] || {message:'error interno de servidor', status: 500};

@@ -1,5 +1,5 @@
 import express from 'express';
-import custumerRouter from './custumerRoutes.js';
+import companyRouter from './companyRoutes.js';
 import personRouter from './personRoutes.js';
 import authRouter from './auth.js';
 
@@ -9,7 +9,7 @@ export default function routes(app) {
   });
   app.use(
     express.json(),
-    custumerRouter,
+    companyRouter,
     personRouter,
     authRouter
   );
