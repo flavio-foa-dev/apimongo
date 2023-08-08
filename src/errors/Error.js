@@ -1,8 +1,8 @@
 class ErrorHandler extends Error {
-  constructor(message = "Internal Error", status = 500) {
-    super()
-    this.message = message
-    this.status = status
+  constructor(message = 'Internal Error', status = 500) {
+    super();
+    this.message = message;
+    this.status = status;
   }
 
   sendMessage(res) {
@@ -13,8 +13,8 @@ class ErrorHandler extends Error {
           message: this.message,
           status: this.status
         }
-      )
+      );
   }
 }
 
-export default ErrorHandler
+export default ErrorHandler;

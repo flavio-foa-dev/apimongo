@@ -8,8 +8,8 @@ export default class CustumerController {
       const result = await ModelCustumer.find()
         .populate('owner').exec();
 
-
       res.status(200).json(result);
+
     } catch (error) {
       next(error);
     }
@@ -20,12 +20,11 @@ export default class CustumerController {
     try {
       const result = await ModelCustumer.findById(id);
 
-
       if(!result) {
         return res.status(404).json({ message: 'Custumer not found'});
       }
-
       res.status(200).json(result);
+
     } catch (error) {
       next(error);
     }
@@ -41,24 +40,24 @@ export default class CustumerController {
     }
   };
 
-  static updateCustumer = async (req, res) => {
+  static updateCustumer = async (req, res, next) => {
     const id = req.params.id;
     try {
       await ModelCustumer.findByIdAndUpdate(id, {$set: req.body});
       res.status(200).send({message: 'Custumer atualizado com sucesso'});
     } catch (error) {
-      res.status(500).send({message: error.message});
+      next(error);
     }
   };
 
-  static async destroy(req, res) {
+  static async destroy(req, res, next) {
     const {id} = req.params;
     try {
       await ModelCustumer.findByIdAndDelete(id);
       res.status(200).json({message: 'excluido with sucess'});
 
     } catch (error) {
-      res.status(500).json({message: error.message});
+      next(error);
     }
   }
 }

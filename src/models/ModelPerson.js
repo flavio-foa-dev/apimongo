@@ -17,11 +17,11 @@ const personSchema = new mongoose.Schema(
     },
     password: {
       type: 'string',
-      required: [true, 'O nome e requerido']
+      required: [true, 'A senha e requerido']
     },
     date_nasc: {
       type: 'date',
-      required: [true, 'O nome e requerido']
+      required: [true, 'A data Nascimentoe requerido']
     }
   }
 );

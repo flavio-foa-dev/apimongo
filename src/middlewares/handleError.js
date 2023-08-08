@@ -1,21 +1,26 @@
-import mongoose from "mongoose"
-import ErrorHandler from "../errors/Error.js"
+import mongoose from 'mongoose';
+import ErrorHandler from '../errors/Error.js';
+
+function handleFieldSave(err){
+  const messageValues = Object.values(err.errors).map((item)=> item.message).join(', ');
+  return {message: `field required s ${messageValues}`, status: 400};
+}
 
 function err(err) {
-  const error = err.name
+  const error = err.name;
   const message = {
-    CastError : "format id invalid",
-    null : "not found",
-    ValidationError: "field required",
-    MongoServerError: "customer already registered"
-  }
-  return message[error]
+    CastError : {message:'format id invalid', status: 400},
+    null : {message:'not found', status: 404},
+    MongoServerError: 'customer already registered',
+    ValidationError: handleFieldSave(err),
+  };
+  return message[error] || {message:'error interno eempty', status: 500};
 }
 
 const handleError = (error, req, res, next) => {
-  err(error, "testando")
-  res.status(400).json({message : err(error)})
-  next()
-}
+  const {message, status} = err(error);
+  res.status(status).json(message);
+  next();
+};
 
-export default handleError
+export default handleError;
