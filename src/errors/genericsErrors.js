@@ -1,3 +1,6 @@
+import mongoose from 'mongoose';
+
+
 class ErrorHandler extends Error {
   constructor(message = 'Internal Error', status = 500) {
     super();
@@ -18,3 +21,10 @@ class ErrorHandler extends Error {
 }
 
 export default ErrorHandler;
+
+
+
+mongoose.Schema.Types.String.set('validate', {
+  validator: (valor) => valor !== '',
+  message: ({ path }) => `O campo ${path} foi fornecido em branco.`
+});

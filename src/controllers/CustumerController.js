@@ -9,7 +9,6 @@ export default class CustumerController {
         .populate('owner').exec();
 
       res.status(200).json(result);
-
     } catch (error) {
       next(error);
     }
@@ -18,13 +17,14 @@ export default class CustumerController {
   static getCustumerById = async(req, res, next) => {
     const id = req.params.id;
     try {
-      const result = await ModelCustumer.findById(id);
+      const result = await ModelCustumer.findById(id)
+        .populate('owner').exec();
 
       if(!result) {
         return res.status(404).json({ message: 'Custumer not found'});
       }
-      res.status(200).json(result);
 
+      res.status(200).json(result);
     } catch (error) {
       next(error);
     }
