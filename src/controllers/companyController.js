@@ -1,5 +1,7 @@
 
 import Modelcompany from '../models/ModelCompany.js';
+import ModelPerson from '../models/ModelPerson.js';
+
 
 export default class CompanyController {
 
@@ -32,10 +34,23 @@ export default class CompanyController {
 
   static async getcompanyByfilter(req, res, next) {
     try {
-      const {company, person} = req.query;
+      const {name, type, owner} = req.query;
 
-      const result = await Modelcompany.find({'company': query});
+      const filters = {};
+      if(name) filters.name = new RegExp(name, 'gi');
+      if(name) filters.type = {$regex: type, $options: 'i'};
+      if(owner){
+        const personName = await ModelPerson.findOne({name: owner});
+        if(!personName){
+          return res.status(404).json({message: 'person noa cadastrado'});
+        }
+        const personId = personName._id;
+        filters.owner = personId;
+      }
+      const result = await Modelcompany.find(filters);
+      if(!result) return res.status(404).json({message:'not found'});
       res.status(200).json(result);
+
     } catch (error) {
       next(error);
     }
