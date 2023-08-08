@@ -1,6 +1,9 @@
 
 async function handleFieldSave(err){
   console.log('handle errower',err);
+  if(!err.errors){
+    return {message: 'field', status: 400};
+  }
   const messageValues = Object.values(err.errors).map((item)=> item.message).join(', ');
   return {message: `field required s ${messageValues}`, status: 400};
 }

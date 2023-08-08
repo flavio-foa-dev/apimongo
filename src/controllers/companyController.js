@@ -42,12 +42,12 @@ export default class CompanyController {
       if(owner){
         const personName = await ModelPerson.findOne({name: owner});
         if(!personName){
-          return res.status(404).json({message: 'person noa cadastrado'});
+          return res.status(200).json([]);
         }
-        const personId = personName._id;
-        filters.owner = personId;
+        filters.owner = personName._id;
       }
-      const result = await Modelcompany.find(filters);
+      const result = await Modelcompany.find(filters)
+        .populate('owner');
       if(!result) return res.status(404).json({message:'not found'});
       res.status(200).json(result);
 
