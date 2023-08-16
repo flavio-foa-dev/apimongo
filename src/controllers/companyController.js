@@ -7,8 +7,14 @@ export default class CompanyController {
 
   static getcompanyAll = async(req, res, next) => {
     try {
-      const result = await Modelcompany.find()
-        .populate('owner').exec();
+      const {limit = 3, offset = 0} = req.query;
+      const result = await Modelcompany
+        .find()
+        .sort({name: 1})
+        .skip(offset * limit)
+        .limit(limit)
+        .populate('owner')
+        .exec();
 
       res.status(200).json(result);
     } catch (error) {

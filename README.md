@@ -1,3 +1,8 @@
+A parte mais difícil de construir um sistema de software é decidir exatamente o que construir.
+
+– Fred Brooks, O mítico homem-mês
+
+
 # apimongo
 Nodejs | API Rest | MongoDB | Express
 
@@ -21,4 +26,22 @@ npm publish	Faz a publicação do pacote no NPM
 
 npm init @eslint/config
 
+# NPM
+npm install --save-dev @cucumber/cucumber
+### BDD
+O que é BDD (o Behaviour Driven Development)
+BDD tenta melhorar a comunicação e colaboração
+BDD tenta aproximar o negócio e criar um entendimento melhor como a aplicação deveria funcionar
+Existem vários tipos e níveis de testes, como por exemplo:
+testes de unidade
+testes de integração
+testes ponta a ponta (end-to-end)
 
+Scenario: Breaker guesses a word
+  Given the Maker has chosen a word
+  When the Breaker makes a guess
+  Then the Maker is asked to score
+
+  como usar Exemplos para alimentar o mesmo teste com dados diferentes
+como usar DataTables para passar vários dados ao teste de uma vez só
+usar o plugin do “Cucumber”
