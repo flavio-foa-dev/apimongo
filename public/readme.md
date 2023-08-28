@@ -90,3 +90,26 @@ Agora que a constante parametros é uma instância de URLSearchParams, ela possu
 const nomeDocumento = parametros.get("nome");COPIAR CÓDIGO
 Perceba que o método get() recebe o nome do parâmetro da URL e retorna seu valor. Assim, ainda usando a URL http://localhost:3000/documento.html?nome=JavaScript como exemplo, o código parametros.get("nome") irá nos retornar a string "JavaScript".
 
+Agrupar clientes em salas do Socket.IO:
+
+Utilizamos o método join() (do inglês “juntar”) para isso, passando como parâmetro o nome da sala na qual queremos colocar o cliente. No nosso caso, os nomes das salas eram os nomes dos documentos.
+Emitir eventos para uma sala específica:
+
+Para isso, utilizamos o método to() (do inglês “para”), passando como parâmetro o nome da sala para a qual queremos emitir o evento.
+Enviar um dado de volta para o cliente com Reconhecimento:
+
+Utilizamos esse recurso quando o cliente emite um evento e espera receber dados de volta do servidor, imitando o modelo de requisição-resposta do HTTP. Para tal, passamos uma função como último parâmetro de emit(), a obtemos na função callback do lado do servidor e a executamos, passando como parâmetro o dado que interessa ao cliente.
+
+Obter todos os documentos do banco de dados:
+
+Utilizamos o método find(), que retorna um Cursor do MongoDB. Para transformá-lo em um array que contém todos os documentos, utilizamos o método toArray(). Enviando essa informação de volta ao cliente, a tela inicial poderá mostrar os documentos do banco de dados em vez de uma lista estática.
+Adicionar um documento:
+
+Utilizamos o método insertOne() para inserir um novo documento no MongoDB. Precisamos verificar se o documento não existe para então adicioná-lo. Por fim, o resultado da operação de adição possui a propriedade acknowledged, que informa se a operação foi reconhecida pelo banco. Em caso positivo, emitimos um evento de volta para os clientes para adicionar o documento na interface front-end.
+Excluir um documento:
+
+Utilizamos o método deleteOne() para excluir um documento do MongoDB. O resultado da operação de exclusão possui a propriedade deletedCount, que informa se a operação foi reconhecida pelo banco. Em caso positivo, emitimos um evento de volta para todos os clientes para realizar as operações necessárias no front-end.
+Atualizar diferentes páginas a partir do mesmo evento:
+
+A partir do evento de exclusão emitido pelo servidor, realizamos diferentes operações dependendo de qual página o cliente está. Quem estiver na página do documento excluído será redirecionado para a página inicial, e quem estiver na página inicial verá o documento ser excluído da lista.
+

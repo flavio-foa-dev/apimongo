@@ -45,3 +45,22 @@ Scenario: Breaker guesses a word
   como usar Exemplos para alimentar o mesmo teste com dados diferentes
 como usar DataTables para passar vários dados ao teste de uma vez só
 usar o plugin do “Cucumber”
+
+```
+import { MongoClient } from "mongodb";
+
+const cliente = new MongoClient("stringDeConexao");
+
+let alunosColecao;
+
+try {
+  await cliente.connect();
+
+  const db = cliente.db("websockets");
+  alunosColecao = db.collection("alunos");
+
+  console.log("Conectado ao banco de dados com sucesso!");
+} catch (erro) {
+  console.log(erro);
+}
+```
