@@ -19,7 +19,12 @@ const io = new Server(createServer);
 
 io.on('connection', (socket) => {
   console.log('connection established', socket.id);
-  socket.on('message', (message) =>{
-    console.log('received message', message);
-  }) ;
+  socket.on('message', (message) => {
+    socket.broadcast.emit('message_client', message);
+  });
+
+  socket.on('docTitle', (docTitle) => {
+    console.log('docTitle', docTitle);
+  });
+
 });

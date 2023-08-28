@@ -43,3 +43,50 @@ Então, ao receber esse dado do outro lado da comunicação, ele deve ser conver
 const dataStr = "2022-11-03T19:11:54.073Z";
 
 const data = new Date(dataStr);
+
+Emitir seu primeiro evento a partir do cliente:
+
+No front-end, utilizamos socket.emit() para emitir o evento "texto_editor" para o servidor, junto com o texto que foi digitado.
+Emitir um evento para vários clientes a partir do servidor:
+
+No back-end, com io.emit(), podemos emitir um evento para todos os clientes ou, com socket.broadcast.emit(), podemos emitir para todos os clientes, exceto o cliente que está emitindo o evento.
+Organizar melhor os arquivos por responsabilidade:
+
+No front-end, deixamos um arquivo responsável por lidar com as manipulações do HTML (documento.js) e outro responsável para lidar com as funções do Socket.IO (socket-front-documento.js).
+
+obter os parâmetros da URL no lado do front-end! Vamos explorar um pouco mais as funções e variáveis que utilizamos?
+
+Primeiramente, nós nos aproveitamos da classe URLSearchParams, que pode ser instanciada para criar um objeto que conterá informações da URL.
+
+Existem diferentes tipos de dados válidos que podemos passar como parâmetro de URLSearchParams() para criar uma nova instância; como por exemplo uma string, um array de arrays ou um objeto. Os três exemplos abaixo são equivalentes:
+
+// string como parâmetro
+const parametros = new URLSearchParams("?nome=maria&sobrenome=eduarda");
+
+// array de arrays como parâmetro
+const parametros = new URLSearchParams([
+  ["nome", "maria"],
+  ["sobrenome", "eduarda"],
+]);
+
+// objeto como parâmetro
+const parametros = new URLSearchParams({
+  nome: "maria",
+  sobrenome: "eduarda"
+});COPIAR CÓDIGO
+Note que, ao passar uma string, ela deve seguir o mesmo padrão dos parâmetros passados em uma URL: os parâmetros são separados por & e a chave e o valor de cada parâmetro são separados por =. E especificamente no caso do URLSearchParams(), a interrogação ? no início da string é opcional.
+
+Mas no vídeo passamos o valor window.location.search como parâmetro de URLSearchParams(). De onde ele vem?
+
+Window é um objeto global que contém várias propriedades e métodos do front-end. Uma dessas propriedades é a location, que é um objeto que possui métodos e propriedades relacionados à URL atual. E uma de suas propriedades é a search, que nos dá justamente uma string dos parâmetros da URL.
+
+Assim, se você estiver em http://localhost:3000/documento.html?nome=JavaScript no navegador, o valor de window.location.search será "?nome=JavaScript".
+
+Logo, chegamos ao código escrito em vídeo:
+
+const parametros = new URLSearchParams(window.location.search);COPIAR CÓDIGO
+Agora que a constante parametros é uma instância de URLSearchParams, ela possui métodos como get(), has(), entries(), entre outros. Então, adicionamos o seguinte código:
+
+const nomeDocumento = parametros.get("nome");COPIAR CÓDIGO
+Perceba que o método get() recebe o nome do parâmetro da URL e retorna seu valor. Assim, ainda usando a URL http://localhost:3000/documento.html?nome=JavaScript como exemplo, o código parametros.get("nome") irá nos retornar a string "JavaScript".
+
