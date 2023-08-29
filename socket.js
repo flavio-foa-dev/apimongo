@@ -3,24 +3,14 @@ import url from 'url';
 import path from 'path';
 import http from 'http';
 import {Server} from 'socket.io';
+import {data} from './data/documents.js';
 
 const app = express();
 const PORT = process.env.PORT || 3002;
 
-const doc = [
-  {
-    name: 'JavaScript',
-    text: 'test'
-  },
-  {
-    name: 'Node',
-    text: 'test'
-  },
-  {
-    name: 'Socket.io',
-    text: 'test'
-  }
-];
+const doc = data;
+
+
 
 function getByName(name) {
   return  doc.find((item) => item.name === name);
