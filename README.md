@@ -64,3 +64,11 @@ try {
   console.log(erro);
 }
 ```
+
+```
+const io = new Server(servidorHttp, {
+  cors: {
+    origin: "http://localhost:5000",
+  },
+});
+```
