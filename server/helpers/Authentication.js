@@ -25,4 +25,4 @@ const eu2 = eu.generateToken();
 console.log(eu2);
 
 const eu3 = eu.checkToken(eu2);
-console.log('valid',eu3);
+console.log('valid',eu3.email);
